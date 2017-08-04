@@ -9,7 +9,14 @@
 * Android Studio
 
 	```
-    compile 'com.carlrocks:mangohttp:1.0'
+	repositories {
+	  jcenter()
+	  maven { url 'https://jitpack.io' }
+	}
+
+	dependencies {
+	  compile 'com.github.carlrocks:MangoHttp:1.0'
+	}
 	```
 
 
