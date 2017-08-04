@@ -8,7 +8,7 @@
 
 * Android Studio
 
-	```
+```
 repositories {
   jcenter()
   maven { url 'https://jitpack.io' }
@@ -17,7 +17,7 @@ repositories {
 dependencies {
   compile 'com.github.carlrocks:MangoHttp:1.0'
 }
-	```
+```
 
 
 ## 目前对以下需求进行了封装
@@ -32,7 +32,7 @@ dependencies {
 
 默认情况下，将直接使用okhttp默认的配置生成OkhttpClient，如果你有任何配置，记得在Application中调用`initClient`方法进行设置。
 
-```java
+```
 public class MyApplication extends Application
 {
 	@Override
