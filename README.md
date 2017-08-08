@@ -28,32 +28,6 @@ dependencies {
 * 上传下载的进度回调
 * 支持自签名网站https的访问，提供方法设置下证书就行
 
-## 配置OkhttpClient
-
-默认情况下，将直接使用okhttp默认的配置生成OkhttpClient，如果你有任何配置，记得在Application中调用`initClient`方法进行设置。
-
-```
-public class MyApplication extends Application
-{
-	@Override
-    public void onCreate()
-    {
-        super.onCreate();
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .addInterceptor(new LoggerInterceptor("TAG"))
-                  .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                  .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                  //其他配置
-                 .build();
-
-        MangoHttpUtils.initClient(okHttpClient);
-
-    }
-}
-```
-别忘了在AndroidManifest中设置。
-
 
 ## 请求Log
 
@@ -61,43 +35,6 @@ public class MyApplication extends Application
 
 ```
  MangoLog.DEBUG = true;
-```
-
-
-## 对于Https
-
-依然是通过配置即可，框架中提供了一个类`HttpsUtils`
-
-* 设置可访问所有的https网站
-
-```
-MangoHttp.initSslSocktFactory(null, null, null);
-```
-
-* 设置具体的证书
-
-```
-MangoHttp.initSslSocktFactory(证书的inputstream, null, null);
-```
-
-* 双向认证
-
-```
-
-MangoHttp.initSslSocktFactory(
-	证书的inputstream,
-	本地证书的inputstream,
-	本地证书的密码);
-```
-
-同样的，框架中只是提供了几个实现类，你可以自行实现`SSLSocketFactory`，传入sslSocketFactory即可。
-
-
-```
-
-MangoHttp.initSslSocktFactory(
-	SSLSocketFactory sslSocketFactory,
-	X509TrustManager trustManager);
 ```
 
 ##其他用法示例
@@ -186,6 +123,42 @@ MangoHttp.donwload("http://sw.bos.baidu.com/sw-search-sp/software/532b3c8cc8042/
  });
 
 callback回调中有`inProgress `方法，直接复写即可。
+```
+
+## 对于Https
+
+依然是通过配置即可，框架中提供了一个类`HttpsUtils`
+
+* 设置可访问所有的https网站
+
+```
+MangoHttp.initSslSocktFactory(null, null, null);
+```
+
+* 设置具体的证书
+
+```
+MangoHttp.initSslSocktFactory(证书的inputstream, null, null);
+```
+
+* 双向认证
+
+```
+
+MangoHttp.initSslSocktFactory(
+	证书的inputstream,
+	本地证书的inputstream,
+	本地证书的密码);
+```
+
+同样的，框架中只是提供了几个实现类，你可以自行实现`SSLSocketFactory`，传入sslSocketFactory即可。
+
+
+```
+
+MangoHttp.initSslSocktFactory(
+	SSLSocketFactory sslSocketFactory,
+	X509TrustManager trustManager);
 ```
 
 ## 混淆
