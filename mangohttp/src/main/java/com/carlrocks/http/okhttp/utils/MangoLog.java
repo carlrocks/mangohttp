@@ -7,7 +7,7 @@ import com.carlrocks.http.okhttp.logger.*;
  */
 public class MangoLog
 {
-    private static String tag = "mangoHttp";
+    public static String tag = "mangoHttp";
     public static boolean DEBUG = false;
 
     static {
