@@ -11,11 +11,11 @@
 ```
 repositories {
     jcenter()
-    maven { url 'https://jitpack.io' }
+    maven { url 'https://www.jitpack.io' }
 }
 
 dependencies {
-    compile 'com.github.carlrocks:mangohttp:1.2'
+    compile 'com.github.carlrocks:mangohttp:v1.3'
 }
 ```
 
