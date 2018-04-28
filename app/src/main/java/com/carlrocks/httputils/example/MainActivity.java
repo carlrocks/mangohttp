@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(ResultResp anchorResp) {
                 if(anchorResp != null){
                     String data = anchorResp.getData();
-                    Log.i("data====>", data);
+                    MangoLog.i("data====>"+data);
                     tvGetProgress.setVisibility(View.GONE);
                     tvGetView.setText("请求时间："+(System.currentTimeMillis() - current+"s"));
                 }
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(ResultResp anchorResp) {
                 if(anchorResp != null){
                     String data = anchorResp.getData();
-                    Log.i("data====>", data);
+                    MangoLog.i("data====>"+data);
                     tvPostProgress.setVisibility(View.GONE);
                     tvPostView.setText("请求时间："+(System.currentTimeMillis() - current+"s"));
                 }

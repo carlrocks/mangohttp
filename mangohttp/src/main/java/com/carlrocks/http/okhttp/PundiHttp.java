@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 import java.io.InputStream;
-import java.util.Map;
 
 
 /**
@@ -30,9 +29,9 @@ public abstract class PundiHttp {
      * @param callBack
      * @param <T>
      */
-    public static <T> void post(String url, final Class<T> clazz, final Map<String, String> headers,
+    public static <T> void post(String url, final Class<T> clazz, final RequestHeaderParameters headers,
                                 final NetRequestParameters parameters, final PundiCallBack<T> callBack) {
-        MangoHttpUtils.post().url(url).tag(url).headers(headers).paramsData(parameters.getParams()).build().execute(new Callback() {
+        MangoHttpUtils.post().url(url).tag(url).addRequestHeaders(headers).addRequestParams(parameters.getParams()).build().execute(new Callback() {
             @Override
             public Object parseNetworkResponse(Response response, int id) throws Exception {
                 return response.body().string();
@@ -78,9 +77,11 @@ public abstract class PundiHttp {
      * @param callBack
      * @param <T>
      */
-    public static <T> void get(String url, final Class<T> clazz, final Map<String, String> headers,
+    public static <T> void get(String url, final Class<T> clazz, final RequestHeaderParameters headers,
                                final NetRequestParameters parameters, final PundiCallBack<T> callBack) {
-        MangoHttpUtils.get().url(url).tag(url).headers(headers).paramsData(parameters.getParams()).build().execute(new Callback() {
+        MangoHttpUtils.get().url(url).tag(url)
+                .addRequestHeaders(headers)
+                .addRequestParams(parameters.getParams()).build().execute(new Callback() {
             @Override
             public Object parseNetworkResponse(Response response, int id) throws Exception {
                 return response.body().string();
@@ -118,8 +119,8 @@ public abstract class PundiHttp {
         });
     }
 
-    public static <T> void postContent(String url, MediaType mediaType, final Class<T> clazz, final Map<String, String> headers, String content, final PundiCallBack<T> callBack) {
-        MangoHttpUtils.postString().url(url).tag(url).headers(headers)
+    public static <T> void postContent(String url, MediaType mediaType, final Class<T> clazz, final RequestHeaderParameters headers, String content, final PundiCallBack<T> callBack) {
+        MangoHttpUtils.postString().url(url).tag(url).addRequestHeaders(headers)
                 .mediaType(mediaType).content(content).build().execute(new Callback() {
             @Override
             public Object parseNetworkResponse(Response response, int id) throws Exception {
@@ -188,5 +189,9 @@ public abstract class PundiHttp {
                 //其他配置
                 .build();
         MangoHttpUtils.initClient(okHttpClient);
+    }
+
+    public static void openLog(boolean open){
+        MangoLog.DEBUG = open;
     }
 }

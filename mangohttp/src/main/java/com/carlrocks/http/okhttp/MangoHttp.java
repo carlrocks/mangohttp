@@ -22,9 +22,9 @@ public final class MangoHttp {
 	 * @param callBack
 	 * @param <T>
 	 */
-	public static <T> void post(String url, final Class<T> clazz,
+	public static <T> void post(String url, final Class<T> clazz, final RequestHeaderParameters headerParameters,
                                 final NetRequestParameters parameters, final RequestCallback<T> callBack) {
-		MangoHttpUtils.post().url(url).tag(url).paramsData(parameters.getParams()).build().execute(new Callback() {
+		MangoHttpUtils.post().url(url).tag(url).addRequestHeaders(headerParameters).addRequestParams(parameters.getParams()).build().execute(new Callback() {
 			@Override
 			public Object parseNetworkResponse(Response response, int id) throws Exception {
 				return response.body().string();
@@ -53,9 +53,9 @@ public final class MangoHttp {
 	 * @param callBack
 	 * @param <T>
 	 */
-	public static <T> void get(String url, final Class<T> clazz,
+	public static <T> void get(String url, final Class<T> clazz,final RequestHeaderParameters headerParameters,
                                 final NetRequestParameters parameters, final RequestCallback<T> callBack) {
-		MangoHttpUtils.get().url(url).tag(url).paramsData(parameters.getParams()).build().execute(new Callback() {
+		MangoHttpUtils.get().url(url).tag(url).addRequestHeaders(headerParameters).addRequestParams(parameters.getParams()).build().execute(new Callback() {
 			@Override
 			public Object parseNetworkResponse(Response response, int id) throws Exception {
 				return response.body().string();
@@ -85,9 +85,9 @@ public final class MangoHttp {
 	 * @param callBack
 	 * @param <T>
 	 */
-	public static <T> void postContent(String url, MediaType mediaType, final Class<T> clazz,
+	public static <T> void postContent(String url, MediaType mediaType, final Class<T> clazz,final RequestHeaderParameters headerParameters,
 							   final String content, final RequestCallback<T> callBack) {
-		MangoHttpUtils.postString().url(url).mediaType(mediaType).content(content).build().execute(new Callback() {
+		MangoHttpUtils.postString().url(url).addRequestHeaders(headerParameters).mediaType(mediaType).content(content).build().execute(new Callback() {
 			@Override
 			public Object parseNetworkResponse(Response response, int id) throws Exception {
 				return response.body().string();

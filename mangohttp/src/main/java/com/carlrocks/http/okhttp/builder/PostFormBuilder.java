@@ -1,5 +1,6 @@
 package com.carlrocks.http.okhttp.builder;
 
+import com.carlrocks.http.okhttp.RequestHeaderParameters;
 import com.carlrocks.http.okhttp.request.PostFormRequest;
 import com.carlrocks.http.okhttp.request.RequestCall;
 import com.carlrocks.http.okhttp.utils.MangoLog;
@@ -71,7 +72,14 @@ public class PostFormBuilder extends OkHttpRequestBuilder<PostFormBuilder> imple
         return this;
     }
 
-    public PostFormBuilder paramsData(Map<String, Object> params)
+    public PostFormBuilder addRequestHeaders(final RequestHeaderParameters headers)
+    {
+        MangoLog.i("requestheaders:" + headers.getParams().toString());
+        headers(headers.getParams());
+        return this;
+    }
+
+    public PostFormBuilder addRequestParams(Map<String, Object> params)
     {
         StringBuilder sb = new StringBuilder();
         TreeMap<String, Object> treeParams = sortMapByKey(params);

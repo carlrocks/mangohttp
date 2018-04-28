@@ -2,6 +2,7 @@ package com.carlrocks.http.okhttp.builder;
 
 import android.net.Uri;
 
+import com.carlrocks.http.okhttp.RequestHeaderParameters;
 import com.carlrocks.http.okhttp.request.GetRequest;
 import com.carlrocks.http.okhttp.request.RequestCall;
 import com.carlrocks.http.okhttp.utils.MangoLog;
@@ -54,7 +55,13 @@ public class GetBuilder extends OkHttpRequestBuilder<GetBuilder> implements HasP
         return this;
     }
 
-    public GetBuilder paramsData(Map<String, Object> params)
+    public GetBuilder addRequestHeaders(RequestHeaderParameters headers)
+    {
+        headers(headers.getParams());
+        return this;
+    }
+
+    public GetBuilder addRequestParams(Map<String, Object> params)
     {
         StringBuilder sb = new StringBuilder();
         TreeMap<String, Object> treeParams = sortMapByKey(params);
