@@ -7,20 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.carlrocks.http.okhttp.MangoHttp;
-import com.carlrocks.http.okhttp.MangoHttpUtils;
-import com.carlrocks.http.okhttp.RequestCallback;
+import com.carlrocks.http.okhttp.PundiCallBack;
 import com.carlrocks.http.okhttp.callback.FileCallBack;
-import com.carlrocks.http.okhttp.exception.NetRequestException;
-import com.carlrocks.http.okhttp.https.HttpsUtils;
 import com.carlrocks.http.okhttp.utils.MangoLog;
-import com.carlrocks.httputils.entity.AnchorData;
-import com.carlrocks.httputils.entity.AnchorResp;
+import com.carlrocks.httputils.entity.ResultResp;
 import com.carlrocks.httputils.http.impl.CommonNetworkImpl;
 import com.carlrocks.httputils.http.impl.DownloadFileImpl;
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
 
 import java.io.File;
 
@@ -72,20 +65,20 @@ public class MainActivity extends AppCompatActivity {
     private void requestGET(){
         tvGetProgress.setVisibility(View.VISIBLE);
         final long current = System.currentTimeMillis();
-        CommonNetworkImpl.testGet("50b8984076a13fc1f8436f010408951b", "热门", "MIX", new RequestCallback<AnchorResp>() {
+        CommonNetworkImpl.testGet("热门", "MIX", new PundiCallBack<ResultResp>() {
             @Override
-            public void done(AnchorResp anchorResp) {
+            public void onSuccess(ResultResp anchorResp) {
                 if(anchorResp != null){
-                    AnchorData data = anchorResp.getData();
-                    MangoLog.i(data.getList().size()+"");
+                    String data = anchorResp.getData();
+                    Log.i("data====>", data);
                     tvGetProgress.setVisibility(View.GONE);
                     tvGetView.setText("请求时间："+(System.currentTimeMillis() - current+"s"));
                 }
             }
 
             @Override
-            public void onException(NetRequestException exception) {
-                Log.i("====", exception.getMessage()+"");
+            public void onError(int code, String msg) {
+
             }
         });
     }
@@ -93,20 +86,20 @@ public class MainActivity extends AppCompatActivity {
     private void requestPost(){
         tvPostProgress.setVisibility(View.VISIBLE);
         final long current = System.currentTimeMillis();
-        CommonNetworkImpl.testPost("50b8984076a13fc1f8436f010408951b", "热门", "MIX", new RequestCallback<AnchorResp>() {
+        CommonNetworkImpl.testPost("热门", "MIX", new PundiCallBack<ResultResp>() {
             @Override
-            public void done(AnchorResp anchorResp) {
+            public void onSuccess(ResultResp anchorResp) {
                 if(anchorResp != null){
-                    AnchorData data = anchorResp.getData();
-                    MangoLog.i(data.getList().size()+"");
+                    String data = anchorResp.getData();
+                    Log.i("data====>", data);
                     tvPostProgress.setVisibility(View.GONE);
                     tvPostView.setText("请求时间："+(System.currentTimeMillis() - current+"s"));
                 }
             }
 
             @Override
-            public void onException(NetRequestException exception) {
-                Log.i("====", exception.getMessage()+"");
+            public void onError(int code, String msg) {
+                Log.i("====", "msg");
             }
         });
     }

@@ -1,30 +1,25 @@
 package com.carlrocks.httputils.http.impl;
 
-import com.carlrocks.http.okhttp.NetRequestParameters;
-import com.carlrocks.http.okhttp.RequestCallback;
-import com.carlrocks.httputils.entity.UploadResp;
-import com.carlrocks.httputils.entity.AnchorResp;
+import com.carlrocks.http.okhttp.PundiCallBack;
+import com.carlrocks.httputils.entity.ResultResp;
+import com.carlrocks.httputils.example.RequestParameters;
 import com.carlrocks.httputils.http.BaseNetworkReq;
-
-import java.io.File;
 
 public class CommonNetworkImpl extends BaseNetworkReq{
 
-    private static final String TAG_GETANCHOR = "getAnchorListTest";
+    private static final String TAG_GETANCHOR = "api/exchangeToken";
 
-    public static void testGet(String token, String province, String device, RequestCallback<AnchorResp> callBack){
-        NetRequestParameters parameters = new NetRequestParameters();
-        parameters.put("token", token);
+    public static void testGet(String province, String device, PundiCallBack<ResultResp> callBack){
+        RequestParameters parameters = RequestParameters.getBasicParameters();
         parameters.put("province", province);
         parameters.put("device", device);
-        commonGetRequest(TAG_GETANCHOR, AnchorResp.class, parameters, callBack);
+        commonGetRequest(TAG_GETANCHOR, ResultResp.class, parameters, callBack);
     }
 
-    public static void testPost(String token, String province, String device, RequestCallback<AnchorResp> callBack){
-        NetRequestParameters parameters = new NetRequestParameters();
-        parameters.put("token", token);
+    public static void testPost(String province, String device, PundiCallBack<ResultResp> callBack){
+        RequestParameters parameters = RequestParameters.getBasicParameters();
         parameters.put("province", province);
         parameters.put("device", device);
-        commonRequest(TAG_GETANCHOR, AnchorResp.class, parameters, callBack);
+        commonRequest(TAG_GETANCHOR, ResultResp.class, parameters, callBack);
     }
 }
