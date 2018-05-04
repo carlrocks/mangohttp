@@ -109,8 +109,9 @@ public class MangoHttpUtils
 
     public void execute(final RequestCall requestCall, Callback callback)
     {
-        if (callback == null)
+        if (callback == null) {
             callback = Callback.CALLBACK_DEFAULT;
+        }
         final Callback finalCallback = callback;
         final int id = requestCall.getOkHttpRequest().getId();
 
@@ -146,8 +147,9 @@ public class MangoHttpUtils
                     sendFailResultCallback(call, e, finalCallback, id);
                 } finally
                 {
-                    if (response.body() != null)
+                    if (response.body() != null) {
                         response.body().close();
+                    }
                 }
 
             }
@@ -157,7 +159,7 @@ public class MangoHttpUtils
 
     public void sendFailResultCallback(final Call call, final Exception e, final Callback callback, final int id)
     {
-        if (callback == null) return;
+        if (callback == null) {return;}
 
         mPlatform.execute(new Runnable()
         {
@@ -172,7 +174,7 @@ public class MangoHttpUtils
 
     public void sendSuccessResultCallback(final Object object, final Callback callback, final int id)
     {
-        if (callback == null) return;
+        if (callback == null) {return;}
         mPlatform.execute(new Runnable()
         {
             @Override

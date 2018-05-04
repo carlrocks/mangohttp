@@ -1,6 +1,8 @@
 package com.carlrocks.http.okhttp;
 
 import android.graphics.Bitmap;
+import com.carlrocks.http.okhttp.json.Convert;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -161,5 +163,9 @@ public class NetRequestParameters {
 			}
 		}
 		return false;
+	}
+
+	public String toJson(){
+		return Convert.toJson(this.getParams());
 	}
 }

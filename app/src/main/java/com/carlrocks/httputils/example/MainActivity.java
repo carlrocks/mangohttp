@@ -7,8 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.carlrocks.http.okhttp.PundiCallBack;
 import com.carlrocks.http.okhttp.callback.FileCallBack;
+import com.carlrocks.http.okhttp.json.DataResponse;
+import com.carlrocks.http.okhttp.json.RequestCallBack;
 import com.carlrocks.http.okhttp.utils.MangoLog;
 import com.carlrocks.httputils.entity.ResultResp;
 import com.carlrocks.httputils.http.impl.CommonNetworkImpl;
@@ -65,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
     private void requestGET(){
         tvGetProgress.setVisibility(View.VISIBLE);
         final long current = System.currentTimeMillis();
-        CommonNetworkImpl.testGet("热门", "MIX", new PundiCallBack<ResultResp>() {
+        CommonNetworkImpl.testGet("热门", "MIX", new RequestCallBack<DataResponse<ResultResp>>() {
             @Override
-            public void onSuccess(ResultResp anchorResp) {
-                if(anchorResp != null){
-                    String data = anchorResp.getData();
-                    MangoLog.i("data====>"+data);
+            public void onSuccess(DataResponse<ResultResp> response) {
+                if(response != null){
+                    ResultResp data = response.data;
+                    MangoLog.i("data====>"+data.isResult());
                     tvGetProgress.setVisibility(View.GONE);
                     tvGetView.setText("请求时间："+(System.currentTimeMillis() - current+"s"));
                 }
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(int code, String msg) {
-
+                Log.i("====", code + "=====" + msg);
             }
         });
     }
@@ -86,12 +87,13 @@ public class MainActivity extends AppCompatActivity {
     private void requestPost(){
         tvPostProgress.setVisibility(View.VISIBLE);
         final long current = System.currentTimeMillis();
-        CommonNetworkImpl.testPost("热门", "MIX", new PundiCallBack<ResultResp>() {
+        CommonNetworkImpl.testPost("热门", "MIX", new RequestCallBack<DataResponse<ResultResp>>() {
+
             @Override
-            public void onSuccess(ResultResp anchorResp) {
-                if(anchorResp != null){
-                    String data = anchorResp.getData();
-                    MangoLog.i("data====>"+data);
+            public void onSuccess(DataResponse<ResultResp> response) {
+                if(response != null){
+                    ResultResp data = response.data;
+                    MangoLog.i("data====>"+data.isResult());
                     tvPostProgress.setVisibility(View.GONE);
                     tvPostView.setText("请求时间："+(System.currentTimeMillis() - current+"s"));
                 }
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(int code, String msg) {
-                Log.i("====", "msg");
+                Log.i("====", code + "=====" + msg);
             }
         });
     }

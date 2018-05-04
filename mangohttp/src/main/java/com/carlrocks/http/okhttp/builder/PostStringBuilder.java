@@ -4,6 +4,7 @@ import com.carlrocks.http.okhttp.RequestHeaderParameters;
 import com.carlrocks.http.okhttp.request.PostStringRequest;
 import com.carlrocks.http.okhttp.request.RequestCall;
 
+import com.carlrocks.http.okhttp.utils.MangoLog;
 import okhttp3.MediaType;
 
 import java.util.Map;
@@ -20,6 +21,7 @@ public class PostStringBuilder extends OkHttpRequestBuilder<PostStringBuilder>
     public PostStringBuilder content(String content)
     {
         this.content = content;
+        MangoLog.i("===PosString===" + url + "  【jsonString】:" + content);
         return this;
     }
 

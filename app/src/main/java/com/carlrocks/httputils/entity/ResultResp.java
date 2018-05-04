@@ -1,14 +1,14 @@
 package com.carlrocks.httputils.entity;
 
-public class ResultResp extends BaseResp {
+public class ResultResp{
 
-    private String data;
+    boolean result;
 
-    public String getData() {
-        return data;
+    public boolean isResult() {
+        return result;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setResult(boolean result) {
+        this.result = result;
     }
 }
