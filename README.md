@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.carlrocks:mangohttp:1.3'
+    compile 'com.github.carlrocks:mangohttp:2.0'
 }
 ```
 
@@ -46,16 +46,16 @@ NetRequestParameters parameters = new NetRequestParameters();
 parameters.put("token", token);
 parameters.put("province", province);
 parameters.put("device", device);
-MangoHttp.get("http://blog.csdn.net", clzz, parameters, new RequestCallback<AnchorResp>() {
+MangoHttp.get("http://blog.csdn.net", parameters, new RequestCallBack<DataResponse<ResultResp>>() {
    @Override
-   public void done(AnchorResp anchorResp) {
-       if(anchorResp != null){
+   public void onSuccess(DataResponse<ResultResp> response) {
+       if(response != null){
 
        }
    }
 
    @Override
-   public void onException(NetRequestException exception) {
+   public void onError(int code, String msg){
    }
 });
 ```
@@ -67,17 +67,17 @@ NetRequestParameters parameters = new NetRequestParameters();
 parameters.put("token", token);
 parameters.put("province", province);
 parameters.put("device", device);
-MangoHttp.post("http://blog.csdn.net", clzz, parameters, new RequestCallback<AnchorResp>() {
-   @Override
-   public void done(AnchorResp anchorResp) {
-       if(anchorResp != null){
+MangoHttp.post("http://blog.csdn.net", parameters, new RequestCallBack<DataResponse<ResultResp>>() {
+  @Override
+  public void onSuccess(DataResponse<ResultResp> response) {
+      if(response != null){
 
-       }
-   }
+      }
+  }
 
-   @Override
-   public void onException(NetRequestException exception) {
-   }
+  @Override
+  public void onError(int code, String msg){
+  }
 });
 
 ```
@@ -87,18 +87,18 @@ MangoHttp.post("http://blog.csdn.net", clzz, parameters, new RequestCallback<Anc
 ```java
  NetRequestParameters parameters = new NetRequestParameters();
  parameters.put("file", file);
- MangoHttp.post("http://blog.csdn.net", clzz, parameters, new RequestCallback<BaseResp>() {
-    @Override
-    public void done(BaseResp baseResp) {
-        if(baseResp != null){
+ MangoHttp.post("http://blog.csdn.net", parameters, new RequestCallBack<DataResponse<ResultResp>>() {
+  @Override
+  public void onSuccess(DataResponse<ResultResp> response) {
+      if(response != null){
 
-        }
-    }
+      }
+  }
 
-    @Override
-    public void onException(NetRequestException exception) {
-    }
- });
+  @Override
+  public void onError(int code, String msg){
+  }
+});
 ```
 将文件作为请求体，发送到服务器。
 
