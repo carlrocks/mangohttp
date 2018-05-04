@@ -6,8 +6,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
-import okhttp3.MediaType;
-import okhttp3.internal.Util;
 import okio.Buffer;
 import okio.BufferedSource;
 import org.json.JSONArray;
@@ -22,8 +20,6 @@ import java.nio.charset.Charset;
 import okhttp3.Call;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
-import static okhttp3.internal.Util.UTF_8;
 
 public abstract class RequestCallBack<T> extends Callback<T> {
 
