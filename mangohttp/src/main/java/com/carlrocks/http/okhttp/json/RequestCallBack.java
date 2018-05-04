@@ -28,7 +28,7 @@ public abstract class RequestCallBack<T> extends Callback<T> {
     public abstract void onSuccess(T response);
 
     /**onError*/
-    public abstract void onError(int code, String msg);
+    public abstract void onError(final int code, final String msg);
 
     private Type type;
 
