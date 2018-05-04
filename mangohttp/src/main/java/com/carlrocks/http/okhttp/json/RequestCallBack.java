@@ -36,7 +36,7 @@ public abstract class RequestCallBack<T> extends Callback<T> {
     public T parseNetworkResponse(Response response, int id) throws Exception {
         ResponseBody responseBody = response.body();
         BufferedSource source = responseBody.source();
-        source.request(Long.MAX_VALUE);
+        source.request(BUFFER_SIZE);
         Buffer buffer = source.buffer();
         String responseBodyString = buffer.clone().readString(Charset.forName("UTF-8"));
         MangoLog.json(responseBodyString);
