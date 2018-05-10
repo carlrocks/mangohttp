@@ -80,13 +80,14 @@ public abstract class RequestCallBack<T> extends Callback<T> {
     @Override
     public void onError(Call call, Exception e, int id) {
         String error = e.getMessage();
-        if(isGoodJson(error)){
+        MangoLog.i(error);
+        try{
             CodeResponse simpleResponse = Convert.fromJson(e.getMessage(), CodeResponse.class);
-            onError(simpleResponse.code,simpleResponse.msg);
-        }else {
+            onError(simpleResponse.code, simpleResponse.msg);
+        }catch (Exception ex){
+            MangoLog.e("parser json error:" + e.getMessage());
             onError(-1,"network error");
         }
-        MangoLog.i(e.toString());
     }
 
     private T parseClass(Response response, Class<?> rawType) throws Exception {
