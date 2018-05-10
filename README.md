@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.carlrocks:mangohttp:2.0'
+    compile 'com.github.carlrocks:mangohttp:2.1'
 }
 ```
 
