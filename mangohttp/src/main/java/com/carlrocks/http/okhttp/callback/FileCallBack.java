@@ -1,5 +1,7 @@
 package com.carlrocks.http.okhttp.callback;
 
+import android.telecom.Call;
+
 import com.carlrocks.http.okhttp.MangoHttpUtils;
 
 import java.io.File;
@@ -97,4 +99,5 @@ public abstract class FileCallBack extends Callback<File>
     }
 
 
+    public abstract void onError(Call call, Exception e, int id);
 }

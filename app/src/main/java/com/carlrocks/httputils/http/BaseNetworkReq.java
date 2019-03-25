@@ -5,6 +5,7 @@ import com.carlrocks.http.okhttp.callback.FileCallBack;
 import com.carlrocks.http.okhttp.json.RequestCallBack;
 import com.carlrocks.httputils.config.ServerHost;
 import com.carlrocks.httputils.example.RequestParameters;
+
 import okhttp3.MediaType;
 
 public class BaseNetworkReq {

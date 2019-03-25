@@ -3,6 +3,7 @@ package com.carlrocks.httputils.example;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -14,7 +15,6 @@ import com.carlrocks.http.okhttp.utils.MangoLog;
 import com.carlrocks.httputils.entity.ResultResp;
 import com.carlrocks.httputils.http.impl.CommonNetworkImpl;
 import com.carlrocks.httputils.http.impl.DownloadFileImpl;
-import okhttp3.Call;
 
 import java.io.File;
 
@@ -107,26 +107,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void testDonwloadFile(){
-        DownloadFileImpl.donloadFile("http://sw.bos.baidu.com/sw-search-sp/software/532b3c8cc8042/QQ_8.9.4.21584_setup.exe",
-                new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "qq.exe") {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-
-            }
-
-            @Override
-            public void onResponse(File response, int id) {
-                MangoLog.i("onResponse:" + response.getAbsolutePath());
-                tvDownloadView.setText("download finished");
-            }
-
-            @Override
-            public void inProgress(float current, long total, int id) {
-                int porgress = (int) (current * 100);
-                tvDownloadView.setText("progress:100/" + porgress + "%");
-                tvDownloadProgress.setProgress(porgress);
-            }
-        });
+//        DownloadFileImpl.donloadFile("http://sw.bos.baidu.com/sw-search-sp/software/532b3c8cc8042/QQ_8.9.4.21584_setup.exe",
+//                new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "qq.exe") {
+//            @Override
+//            public void onError(Call call, Exception e, int id) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(File response, int id) {
+//                MangoLog.i("onResponse:" + response.getAbsolutePath());
+//                tvDownloadView.setText("download finished");
+//            }
+//
+//            @Override
+//            public void inProgress(float current, long total, int id) {
+//                int porgress = (int) (current * 100);
+//                tvDownloadView.setText("progress:100/" + porgress + "%");
+//                tvDownloadProgress.setProgress(porgress);
+//            }
+//           });
 
     }
 }
