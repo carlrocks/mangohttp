@@ -85,8 +85,14 @@ public abstract class RequestCallBack<T> extends Callback<T> {
             CodeResponse simpleResponse = Convert.fromJson(e.getMessage(), CodeResponse.class);
             onError(simpleResponse.code, simpleResponse.msg);
         }catch (Exception ex){
-            MangoLog.e("parser json error:" + e.getMessage());
-            onError(-1,"network error");
+            try {
+                //服务器返回错误码解析失败，是否是http错误码
+                int code = Integer.valueOf(e.getMessage());
+                onError(code,"");
+            }catch (NumberFormatException e1){
+                //解析错误失败了说明错误码和系统错误码都没有解析成功，直接返回-1
+                onError(-1,e.getMessage());
+            }
         }
     }
 

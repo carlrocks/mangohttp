@@ -136,7 +136,8 @@ public class MangoHttpUtils
 
                     if (!finalCallback.validateReponse(response, id))
                     {
-                        sendFailResultCallback(call, new IOException("request failed , reponse's code is : " + response.code()), finalCallback, id);
+                        //sendFailResultCallback(call, new IOException("request failed , reponse's code is : " + response.code()), finalCallback, id);
+                        sendFailResultCallback(call, new IOException("" + response.code()), finalCallback, id);
                         return;
                     }
 
